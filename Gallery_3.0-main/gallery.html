@@ -116,7 +116,8 @@
         .card {
             position: absolute;
             width: 300px;
-            height: 530px;
+            height: auto;
+            min-height: 400px;
             background-color: white;
             border-radius: 20px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), 0 0 15px rgba(255, 255, 255, 0.5);
@@ -167,9 +168,18 @@
         }
 
         .card .card-back {
-            transform: rotateY(180deg);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            transform-style: preserve-3d;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20px;
+            overflow: auto;
+            padding: 20px;
             background: rgba(255, 255, 255, 0.9);
-            padding: 25px;
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -184,11 +194,14 @@
             font-size: 1.8rem;
             font-weight: 600;
             font-family: 'Dancing Script', cursive;
+            word-wrap: break-word;
         }
 
         .card .card-back p {
             font-size: 1.2rem;
             line-height: 1.6;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .card img {
@@ -456,7 +469,15 @@
             
             .card {
                 width: 240px;
-                height: 400px;
+                min-height: 320px;
+            }
+            
+            .card .card-back h3 {
+                font-size: 1.5rem;
+            }
+            
+            .card .card-back p {
+                font-size: 1rem;
             }
             
             .final-button {
@@ -926,7 +947,7 @@
                 
                 // Create the message container
                 const container = document.createElement('div');
-                container.style.maxWidth = '80%';
+                container.style.maxWidth = '90%';
                 container.style.width = '600px';
                 container.style.backgroundColor = 'white';
                 container.style.borderRadius = '20px';
@@ -934,7 +955,8 @@
                 container.style.boxShadow = '0 15px 50px rgba(0, 0, 0, 0.3)';
                 container.style.textAlign = 'center';
                 container.style.position = 'relative';
-                container.style.overflow = 'hidden';
+                container.style.overflow = 'auto';
+                container.style.maxHeight = '90vh';
                 container.style.transform = 'scale(0.8)';
                 container.style.transition = 'transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
                 
@@ -964,18 +986,20 @@
                 title.style.color = 'var(--text-color)';
                 title.style.marginBottom = '20px';
                 title.style.textShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
+                title.style.wordWrap = 'break-word';
                 container.appendChild(title);
                 
                 // Add final message
                 const message = document.createElement('p');
                 message.innerHTML = `We've faced storms, arguments, and countless challenges 💔, but never gave up on each other 💞,<br>
-                                    Through every fight, our love found a way to survive 🌧️❤️,<br>
-                                    It hasn't been perfect, but it's been real, and that's what makes us strong 💪💖,<br>
-                                    Here's to one year of holding on, growing, and choosing each other, again and again 🥂✨`;
+                                     Through every fight, our love found a way to survive 🌧️❤️,<br>
+                                     It hasn't been perfect, but it's been real, and that's what makes us strong 💪💖,<br>
+                                     Here's to one year of holding on, growing, and choosing each other, again and again 🥂✨`;
                 message.style.fontSize = '1.5rem';
                 message.style.lineHeight = '1.8';
                 message.style.color = 'var(--text-color)';
                 message.style.marginBottom = '30px';
+                message.style.wordWrap = 'break-word';
                 container.appendChild(message);
                 
                 // Add close button
@@ -991,16 +1015,26 @@
                 closeButton.style.fontWeight = 'bold';
                 closeButton.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.25)';
                 closeButton.style.transition = 'transform 0.3s ease';
+                closeButton.style.marginBottom = '20px';
                 container.appendChild(closeButton);
-                
-                // Add hover effect
-                closeButton.addEventListener('mouseenter', () => {
-                    closeButton.style.transform = 'translateY(-5px)';
-                });
-                
-                closeButton.addEventListener('mouseleave', () => {
-                    closeButton.style.transform = '';
-                });
+
+                // Add media query styles for mobile
+                const style = document.createElement('style');
+                style.textContent = `
+                    @media (max-width: 768px) {
+                        .modal-container h2 {
+                            font-size: 2rem !important;
+                        }
+                        .modal-container p {
+                            font-size: 1.2rem !important;
+                        }
+                        .modal-container button {
+                            font-size: 1rem !important;
+                            padding: 10px 20px !important;
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
                 
                 // Handle close button click
                 closeButton.addEventListener('click', () => {
