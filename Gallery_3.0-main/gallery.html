@@ -116,8 +116,7 @@
         .card {
             position: absolute;
             width: 300px;
-            height: auto;
-            min-height: 400px;
+            height: 530px;
             background-color: white;
             border-radius: 20px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), 0 0 15px rgba(255, 255, 255, 0.5);
@@ -168,18 +167,9 @@
         }
 
         .card .card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            transform-style: preserve-3d;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 20px;
-            overflow: auto;
-            padding: 20px;
+            transform: rotateY(180deg);
             background: rgba(255, 255, 255, 0.9);
+            padding: 25px;
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -469,7 +459,7 @@
             
             .card {
                 width: 240px;
-                min-height: 320px;
+                height: 400px;
             }
             
             .card .card-back h3 {
